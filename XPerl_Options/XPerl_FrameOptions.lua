@@ -909,6 +909,7 @@ local function DefaultRaidClasses()
 	return {
 		{enable = true, name = "WARRIOR"},
 		{enable = true, name = "DEATHKNIGHT"},
+		{enable = true, name = "DEMONHUNTER"},
 		{enable = true, name = "ROGUE"},
 		{enable = true, name = "HUNTER"},
 		{enable = true, name = "MAGE"},
@@ -925,9 +926,11 @@ local function ValidateClassNames(part)
 	-- This should never happen, but I'm sure someone will find a way to break it
 
 	local list = {WARRIOR = false, MAGE = false, ROGUE = false, DRUID = false,
-			HUNTER = false, SHAMAN = false, PRIEST = false,	WARLOCK = false, PALADIN = false, DEATHKNIGHT = false}
+			HUNTER = false, SHAMAN = false, PRIEST = false,	WARLOCK = false, PALADIN = false, DEATHKNIGHT = false,
+			DEMONHUNTER = false}
 
 	local valid
+	XPerl_CheckRaidClasses(part)
 	if (part.class) then
 		local classCount = 0
 		for i,info in pairs(part.class) do
@@ -935,12 +938,12 @@ local function ValidateClassNames(part)
 				classCount = classCount + 1
 			end
 		end
-		if (classCount == 10) then
+		if (classCount == 11) then
 			valid = true
 		end
 
 		if (valid) then
-			for i = 1,10 do
+			for i = 1,11 do
 				if (part.class[i]) then
 					list[part.class[i].name] = true
 				end
@@ -966,7 +969,7 @@ local function SetClassNames(self)
 	ValidateClassNames(XPerlDB.raid)
 
 	local prefix = self:GetParent():GetParent():GetName().."_"
-	for i = 1,10 do
+	for i = 1,11 do
 		local f = getglobal(prefix.."ClassSel"..i.."_EnableText")
 		if (f) then
 			local class = XPerlDB.raid.class[i].name
@@ -1008,7 +1011,7 @@ function XPerl_Options_RaidSelectAll(self, enable)
 	local val
 	local prefix = self:GetParent():GetName().."_"
 
-	for i = 1,10 do
+	for i = 1,11 do
 		local f = getglobal(prefix.."Grp"..i)
 		if (f) then
 			f:SetChecked(enable)
@@ -1233,11 +1236,11 @@ local function InterestingFrames()
 	local ret = {}
 
 	if (interest == "all") then
-		for i = 1,10 do
+		for i = 1,11 do
 			tinsert(ret, getglobal("XPerl_Raid_Title"..i))
 		end
 	elseif (interest == "odd") then
-		for i = 1,10,2 do
+		for i = 1,11,2 do
 			tinsert(ret, getglobal("XPerl_Raid_Title"..i))
 		end
 	elseif (interest == "even") then
@@ -2001,6 +2004,7 @@ function XPerl_Options_ImportOldConfig(old)
 				{enable = Convert(old.RaidClass8Enable), name = old.RaidClass8 or "SHAMAN"},
 				{enable = Convert(old.RaidClass9Enable), name = old.RaidClass9 or "PALADIN"},
 				{enable = true, name = "DEATHKNIGHT"},
+				{enable = true, name = "DEMONHUNTER"},
 			},
 			titles			= Convert(old.ShowRaidTitles),
 			percent			= Convert(old.ShowRaidPercents),
@@ -2432,7 +2436,7 @@ local function XPerl_Raid_ConfigDefault(default)
 		enable			= 1,
 --		sortByClass		= nil,
 --		sortAlpha		= nil,
-		group = {1, 1, 1, 1, 1, 1, 1, 1, 1},
+		group = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		class = {
 			{enable = 1, name = "WARRIOR"},
 			{enable = 1, name = "ROGUE"},
@@ -2444,6 +2448,7 @@ local function XPerl_Raid_ConfigDefault(default)
 			{enable = 1, name = "SHAMAN"},
 			{enable = 1, name = "PALADIN"},
 			{enable = 1, name = "DEATHKNIGHT"},
+			{enable = 1, name = "DEMONHUNTER"},
 		},
 		titles			= 1,
 		percent			= 1,

@@ -995,6 +995,8 @@ XPERL_CONF_MONITOR_WARRIOR				= "Показ Войнов"
 XPERL_CONF_MONITOR_WARRIOR_DESC			= "Показывать войнов в мониторинге рейда"
 XPERL_CONF_MONITOR_DEATHKNIGHT			= "Показ Рыцарей смерти"
 XPERL_CONF_MONITOR_DEATHKNIGHT_DESC		= "Показывать рыцарей смерти в мониторинге рейда"
+XPERL_CONF_MONITOR_DEMONHUNTER			= "Показ Охотников на демонов"
+XPERL_CONF_MONITOR_DEMONHUNTER_DESC		= "Показывать охотников на демонов в мониторинге рейда"
 
 XPERL_CONF_MONITOR_LOWMANA				= "Мало маны"
 XPERL_CONF_MONITOR_LOWMANA_DESC			= "Установить уровень значения уменьшения маны"

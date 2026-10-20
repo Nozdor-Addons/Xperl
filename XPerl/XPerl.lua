@@ -3,7 +3,24 @@
 -- License: GNU GPL v3, 29 June 2007 (see LICENSE.txt)
 
 local conf
-XPerl_RequestConfig(function(New) conf = New end, "$Revision: 363 $")
+
+-- XPerl_CheckRaidClasses
+function XPerl_CheckRaidClasses(raid)
+	if (type(raid) ~= "table" or type(raid.class) ~= "table") then
+		return
+	end
+	for i,info in pairs(raid.class) do
+		if (type(info) == "table" and info.name == "DEMONHUNTER") then
+			return
+		end
+	end
+	tinsert(raid.class, {enable = 1, name = "DEMONHUNTER"})
+	if (type(raid.group) == "table" and not raid.group[#raid.class]) then
+		raid.group[#raid.class] = 1
+	end
+end
+
+XPerl_RequestConfig(function(New) conf = New XPerl_CheckRaidClasses(New.raid) end, "$Revision: 363 $")
 local percD	= "%d"..PERCENT_SYMBOL
 local perc1F = "%.1f"..PERCENT_SYMBOL
 
@@ -1497,6 +1514,15 @@ function XPerl_DebufHighlightInit()
 			end
 			return Curses.Poison or show
 		end
+
+	elseif (playerClass == "DEMONHUNTER") then
+		getShow = function(Curses)
+			local show
+			if (not conf.highlightDebuffs.class) then
+				show = Curses.Magic or Curses.Curse or Curses.Poison or Curses.Disease
+			end
+			return Curses.Magic or show
+		end
 	else
 		getShow = function(Curses)
 			return Curses.Magic or Curses.Curse or Curses.Poison or Curses.Disease
@@ -1969,6 +1995,11 @@ for class,localClass in pairs(LOCALIZED_CLASS_NAMES_MALE) do
 end
 for class,localClass in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
 	colourList[localClass] = class
+end
+for _, names in ipairs({LOCALIZED_CLASS_NAMES_MALE, LOCALIZED_CLASS_NAMES_FEMALE}) do
+	if (names.DEMONHUNTER) then
+		colourList[names.DEMONHUNTER] = "DEMONHUNTER"
+	end
 end
 
 -- XPerl_GuildStatusUpdate()

@@ -3,7 +3,7 @@
 -- License: GNU GPL v3, 29 June 2007 (see LICENSE.txt)
 
 local XPerl_Raid_Events = {}
-local RaidGroupCounts = {0,0,0,0,0,0,0,0,0,0}
+local RaidGroupCounts = {0,0,0,0,0,0,0,0,0,0,0}
 local myGroup = 0
 local FrameArray = {}		-- List of raid frames indexed by raid ID
 local RaidPositions = {}	-- Back-matching of unit names to raid ID
@@ -55,6 +55,7 @@ XPerl_Roster = {}
 local localGroups = LOCALIZED_CLASS_NAMES_MALE
 local WoWclassCount = 0
 for k,v in pairs(localGroups) do WoWclassCount = WoWclassCount + 1 end
+if (not rawget(localGroups, "DEMONHUNTER")) then WoWclassCount = WoWclassCount + 1 end
 
 local resSpells  = {
 	[GetSpellInfo(2006)] = true,			-- Resurrection
@@ -1557,7 +1558,7 @@ local function SetRaidRoster()
 	RaidPositions = new()
 
 	del(RaidGroupCounts)
-	RaidGroupCounts = new(0,0,0,0,0,0,0,0,0,0)
+	RaidGroupCounts = new(0,0,0,0,0,0,0,0,0,0,0)
 
 	for i = 1,GetNumRaidMembers() do
 		local name, rank, group, level, class, fileName = GetRaidRosterInfo(i)
@@ -2086,6 +2087,7 @@ function XPerl_Raid_ChangeAttributes()
 		return {
 			{enable = true, name = "WARRIOR"},
 			{enable = true, name = "DEATHKNIGHT"},
+			{enable = true, name = "DEMONHUNTER"},
 			{enable = true, name = "ROGUE"},
 			{enable = true, name = "HUNTER"},
 			{enable = true, name = "MAGE"},

@@ -84,6 +84,8 @@ if (not XPerl_ClassPos) then
 		if(class=="PRIEST")  then return 0.5,  0.75,    0.25,	0.5;	end
 		if(class=="WARLOCK") then return 0.75, 1,       0.25,	0.5;	end
 		if(class=="PALADIN") then return 0,    0.25,    0.5,	0.75;	end
+		if(class=="DEATHKNIGHT") then return 0.25, 0.49609375, 0.5,	0.75;	end
+		if(class=="DEMONHUNTER") then return 0.7421875, 0.98828125, 0.5,	0.75;	end
 		return 0.25, 0.5, 0.5, 0.75	-- Returns empty next one, so blank
 	end
 end

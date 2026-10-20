@@ -387,7 +387,7 @@ function XPerl_RaidPets_Align()
 		local counts = XPerl_RaidGroupCounts()
 		local lastUsed = 0
 		if (counts) then
-			for i = 1,9 do
+			for i = 1,#counts do
 				if (counts[i] > 0) then
 					lastUsed = i
 				end

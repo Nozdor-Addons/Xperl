@@ -201,13 +201,13 @@ XPerl_ArcaneExclusions = {
 	[GetSpellInfo(31257)] = true,						-- Chilled
 	[GetSpellInfo(44836)] = true,						-- Banish
 	[GetSpellInfo(24306)] = true,						-- Delusions of Jin'do
-	[GetSpellInfo(46543)] = {ROGUE = true, WARRIOR = true},	-- Ignite Mana
-	[GetSpellInfo(16567)] = {ROGUE = true, WARRIOR = true},	-- Tainted Mind
+	[GetSpellInfo(46543)] = {ROGUE = true, WARRIOR = true, DEMONHUNTER = true},	-- Ignite Mana
+	[GetSpellInfo(16567)] = {ROGUE = true, WARRIOR = true, DEMONHUNTER = true},	-- Tainted Mind
 	[GetSpellInfo(39052)] = {ROGUE = true},				-- Sonic Burst
-	[GetSpellInfo(41190)] = {ROGUE = true, WARRIOR = true}, -- Mind-numbing Poison
+	[GetSpellInfo(41190)] = {ROGUE = true, WARRIOR = true, DEMONHUNTER = true}, -- Mind-numbing Poison
 	[GetSpellInfo(25195)] = {ROGUE = true},				-- Curse of Tongues
 	[GetSpellInfo(30129)] = true,						-- Charred Earth - Nightbane debuff, can't be cleansed, but shows as magic
 	[GetSpellInfo(31651)] = {MAGE = true, WARLOCK = true, PRIEST = true},	-- Banshee Curse, Melee hit rating debuff
 	[GetSpellInfo(38913)] = {ROGUE = true},				-- Silence
-	[GetSpellInfo(31555)] = {ROGUE = true, WARRIOR = true}, -- Decayed Intellect
+	[GetSpellInfo(31555)] = {ROGUE = true, WARRIOR = true, DEMONHUNTER = true}, -- Decayed Intellect
 }
